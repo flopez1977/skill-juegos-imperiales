@@ -155,6 +155,10 @@ def construir(perfil: dict) -> str:
         "fin": [fin.year, fin.month, fin.day],
         "publicados": perfil.get("publicados", 0),
         "meta": temporada["meta_logros"],
+        "cabecera": (temporada.get("formato_post", {})
+                     .get("cabecera", "LOGRO {n}/{meta} - CASA {CASA}")
+                     .replace("{emoji}", casa.get("emoji", ""))
+                     .replace("{CASA}", casa["nombre"].upper())),
     }
 
     plantilla = PLANTILLA.read_text(encoding="utf-8")

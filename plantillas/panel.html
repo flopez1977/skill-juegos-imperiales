@@ -318,7 +318,7 @@
   <div class="cards">
     <div class="card">
       <h4>Cabecera fija</h4>
-      <p><span class="mono">⚔️🟡 LOGRO IMPERIAL n/28 - CASA GRIFO</span><br>Siempre igual, para que se te reconozca al scrollear. Categoría del post: <b>Logros</b>.</p>
+      <p><span class="mono" id="ej-cabecera"></span><br>Siempre igual, para que se te reconozca al scrollear. Categoría del post: <b>Logros</b>.</p>
     </div>
     <div class="card">
       <h4>Cinco bloques numerados</h4>
@@ -386,7 +386,7 @@ function esHoy(iso){ const p=iso.split("-").map(Number); return p[0]===HOY.getFu
 // ---------- borrador de post ----------
 function borrador(x,n){
   const L=[];
-  L.push("⚔️🟡 LOGRO IMPERIAL "+n+"/28 - CASA GRIFO");
+  L.push(CFG.cabecera.replace("{n}", n).replace("{meta}", META));
   L.push("");
   L.push("1️⃣ Sistema / logro: "+x.tit);
   if(x.sis) L.push(x.sis);
@@ -481,14 +481,20 @@ cont.addEventListener("click",e=>{
 });
 cont.addEventListener("change",e=>{
   const c=e.target.closest("[data-chk]");
-  if(c){ S.done[c.dataset.chk]=c.checked; save(); render(); }
+  if(c){ S.done[c.dataset.chk]=c.checked; save(); document.getElementById("ej-cabecera").textContent =
+  CFG.cabecera.replace("{n}", "n").replace("{meta}", META);
+
+render(); }
 });
 
 document.getElementById("filtros").addEventListener("click",e=>{
   const b=e.target.closest(".chip"); if(!b) return;
   filtro=b.dataset.f;
   [...document.querySelectorAll("#filtros .chip")].forEach(c=>c.setAttribute("aria-pressed",c===b));
-  render();
+  document.getElementById("ej-cabecera").textContent =
+  CFG.cabecera.replace("{n}", "n").replace("{meta}", META);
+
+render();
 });
 
 // ---------- panel ----------
@@ -512,7 +518,10 @@ document.getElementById("btn-copy").addEventListener("click",async()=>{
 });
 document.getElementById("btn-done").addEventListener("click",()=>{
   if(abierto===null) return;
-  S.done[D[abierto].d]=true; save(); render(); cerrar();
+  S.done[D[abierto].d]=true; save(); document.getElementById("ej-cabecera").textContent =
+  CFG.cabecera.replace("{n}", "n").replace("{meta}", META);
+
+render(); cerrar();
 });
 
 // ---------- fueguito ----------
@@ -556,6 +565,9 @@ document.getElementById("reserva-cards").innerHTML=RESERVA.map(r=>
  '<div class="card"><h4>'+r.t+'</h4><p>'+r.d+'</p></div>').join("");
 document.getElementById("acc-cards").innerHTML=ACC.map(a=>
  '<div class="card"><h4>'+a.t+'</h4><p>'+a.d+'</p><div class="meta"><span class="cost">'+a.c+'</span></div></div>').join("");
+
+document.getElementById("ej-cabecera").textContent =
+  CFG.cabecera.replace("{n}", "n").replace("{meta}", META);
 
 render();
 </script>

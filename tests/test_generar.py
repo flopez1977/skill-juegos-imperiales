@@ -127,3 +127,33 @@ class TestPanelCompleto:
                         "sis": "", "pro": "", "stk": [], "ant": "", "aho": ""}],
         }
         assert "<script>robar()" not in gen.construir(perfil)
+
+
+class TestCabeceraDelBorrador:
+    """La cabecera del post lleva la casa de quien lo genera.
+
+    Estuvo fija como "CASA GRIFO" en la plantilla: un Pegaso se habría
+    publicado en la casa de otro, y encima en la primera línea del post.
+    """
+
+    def _panel(self, apellido):
+        return gen.construir({
+            "apellido": apellido, "temporada": "v3", "hoy": "2026-09-10",
+            "publicados": 0, "ya": [], "acc": [], "reserva": [],
+            "logros": [{"t": "done", "tit": "x", "src": "/p", "sis": "",
+                        "pro": "", "stk": [], "ant": "", "aho": ""}],
+        })
+
+    def test_cada_casa_sale_en_su_cabecera(self):
+        assert "CASA PEGASO" in self._panel("Ramirez")
+        assert "CASA GRIFO" in self._panel("Lopez")
+        assert "CASA AGUILA" in self._panel("Cordero") or "CASA ÁGUILA" in self._panel("Cordero")
+
+    def test_ninguna_casa_ajena_se_cuela(self):
+        pegaso = self._panel("Ramirez")
+        assert "CASA GRIFO" not in pegaso
+        assert "CASA ÁGUILA" not in pegaso
+
+    def test_lleva_el_emoji_de_la_casa(self):
+        assert "🔵" in self._panel("Ramirez")
+        assert "🟡" in self._panel("Lopez")

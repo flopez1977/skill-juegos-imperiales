@@ -1,7 +1,7 @@
 # LOG — skill juegos-imperiales (privada de Imperio)
 
 **Última actualización:** 2026-08-29
-**Estado actual:** v1.1 · repo privado de Imperio · 42 tests en verde · CI en marcha
+**Estado actual:** v1.2 · repo privado de Imperio · 45 tests en verde · CI en verde
 
 ---
 
@@ -98,3 +98,26 @@ avisa nunca — con el agravante de que este parece que funciona. El calibrado
 contra datos reales no era opcional, era parte de construirlo.
 **Pendiente para próxima sesión:**
 - [ ] Invitar al repo a quien lo pida por privado en la comunidad
+
+### [2026-08-29] — La cabecera del post llevaba la casa equivocada
+**Estado al inicio:** v1.1, a punto de sacar las capturas del post.
+**Trabajo realizado:**
+- Sacando la captura del borrador con un perfil de prueba de la Casa Pegaso, la
+  primera línea del post decía **CASA GRIFO**. Estaba fija en la plantilla desde
+  que se extrajo del panel original. Cualquiera que no fuera del Grifo habría
+  publicado en la casa de otro, y en la línea más visible del post.
+- La cabecera se compone ahora con el emoji y el nombre de la casa a partir del
+  fichero de la temporada. Tres tests nuevos la fijan por casa.
+- Dependabot: `actions/checkout` v4 → v7 (quita además el aviso de Node 20) y
+  `setup-python` v5 → v7, este a mano porque su PR chocaba con el anterior.
+  Ramas fusionadas y borradas en el acto: queda solo `main`.
+- Capturas del logro 3/28 generadas con un perfil inventado (Casa Pegaso), en
+  `../capturas/`, y el post redactado en `../posts/`.
+**Estado al terminar:** 45 tests en verde, CI en verde, una sola rama.
+**Aprendizaje:** el bug no salió de los tests ni de leer el código. Salió de
+mirar una captura. Sacar la captura del README no era trabajo de marketing: era
+la primera vez que alguien miraba el producto con ojos de usuario que no es su
+autor.
+**Pendiente para próxima sesión:**
+- [ ] Proteger `main` requiere GitHub Pro en repos privados: decidir si compensa
+      o si basta con un hook local
