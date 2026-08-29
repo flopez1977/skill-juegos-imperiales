@@ -1,4 +1,4 @@
-# LOG — skill juegos-imperiales
+# LOG — skill juegos-imperiales (privada de Imperio)
 
 **Última actualización:** 2026-08-29
 **Estado actual:** v1.0 publicada · 34 tests en verde · CI en marcha
