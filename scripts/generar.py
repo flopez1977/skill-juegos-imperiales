@@ -171,6 +171,12 @@ def construir(perfil: dict) -> str:
         ("__META__", str(temporada["meta_logros"])),
     ):
         salida = salida.replace(marca, html.escape(str(valor), quote=False))
+
+    # El acento del panel es el color de tu casa, no siempre el del Grifo.
+    color = casa.get("color", {})
+    for tema, clave in (("L", "claro"), ("D", "oscuro")):
+        for i, valor in enumerate(color.get(clave, [])):
+            salida = salida.replace(f"__C_{tema}{i}__", valor)
     return salida
 
 

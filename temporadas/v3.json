@@ -5,9 +5,69 @@
   "fin": "2026-09-28",
   "meta_logros": 28,
   "casas": [
-    {"nombre": "Águila", "emoji": "🔴", "desde": "A", "hasta": "F", "lema": "el estandarte de las legiones"},
-    {"nombre": "Grifo",  "emoji": "🟡", "desde": "G", "hasta": "O", "lema": "el guardián de los tesoros"},
-    {"nombre": "Pegaso", "emoji": "🔵", "desde": "P", "hasta": "Z", "lema": "el que sube al Olimpo"}
+    {
+      "nombre": "Águila",
+      "emoji": "🔴",
+      "desde": "A",
+      "hasta": "F",
+      "lema": "el estandarte de las legiones",
+      "color": {
+        "claro": [
+          "#A32B1E",
+          "#8A2318",
+          "#F8E7E4",
+          "#E4B7B0"
+        ],
+        "oscuro": [
+          "#E8776A",
+          "#F09A8F",
+          "#2C1A17",
+          "#4A2A25"
+        ]
+      }
+    },
+    {
+      "nombre": "Grifo",
+      "emoji": "🟡",
+      "desde": "G",
+      "hasta": "O",
+      "lema": "el guardián de los tesoros",
+      "color": {
+        "claro": [
+          "#9A6E12",
+          "#7C5709",
+          "#F6EDD6",
+          "#DCC489"
+        ],
+        "oscuro": [
+          "#E4B547",
+          "#F0CB79",
+          "#2A2417",
+          "#4A3F22"
+        ]
+      }
+    },
+    {
+      "nombre": "Pegaso",
+      "emoji": "🔵",
+      "desde": "P",
+      "hasta": "Z",
+      "lema": "el que sube al Olimpo",
+      "color": {
+        "claro": [
+          "#2456A8",
+          "#1B4185",
+          "#E2EAF7",
+          "#B3C8E6"
+        ],
+        "oscuro": [
+          "#6FA0E8",
+          "#96BCF2",
+          "#161F2E",
+          "#2C3F5E"
+        ]
+      }
+    }
   ],
   "reglas_casa": [
     "Vale el apellido, no el nombre",
@@ -17,11 +77,36 @@
     "El padrón está congelado: editar el perfil no te cambia de casa"
   ],
   "puntos": [
-    {"concepto": "Logro válido", "valor": 1, "tope": "1 por día", "regla": "+1 por día, máximo 1"},
-    {"concepto": "Referido con tu link", "valor": 10, "tope": "", "regla": "+10 por cada uno"},
-    {"concepto": "Semana completa de fueguito", "valor": 5, "tope": "", "regla": "+5 por semana completa"},
-    {"concepto": "Venta de automatización o sistema IA", "valor": 5, "tope": "", "regla": "+5, con prueba"},
-    {"concepto": "Concursos", "valor": 0, "tope": "", "regla": "participar suma · podio +30/+20/+10"}
+    {
+      "concepto": "Logro válido",
+      "valor": 1,
+      "tope": "1 por día",
+      "regla": "+1 por día, máximo 1"
+    },
+    {
+      "concepto": "Referido con tu link",
+      "valor": 10,
+      "tope": "",
+      "regla": "+10 por cada uno"
+    },
+    {
+      "concepto": "Semana completa de fueguito",
+      "valor": 5,
+      "tope": "",
+      "regla": "+5 por semana completa"
+    },
+    {
+      "concepto": "Venta de automatización o sistema IA",
+      "valor": 5,
+      "tope": "",
+      "regla": "+5, con prueba"
+    },
+    {
+      "concepto": "Concursos",
+      "valor": 0,
+      "tope": "",
+      "regla": "participar suma · podio +30/+20/+10"
+    }
   ],
   "fueguito": {
     "minimo_diario": 10,
