@@ -38,22 +38,41 @@ REGLAS_REDACCION = [
     # Claves de proveedor con prefijo reconocible
     (re.compile(r"\b(sk-[A-Za-z0-9_-]{16,}|xox[baprs]-[A-Za-z0-9-]{10,}|gh[pousr]_[A-Za-z0-9]{20,}|AKIA[0-9A-Z]{16}|AIza[0-9A-Za-z_-]{30,})"),
      "[CLAVE TACHADA]"),
-    # clave: valor / password = valor / token -> valor
-    (re.compile(r"(?i)\b(pass(word|wd)?|contrase(ñ|n)a|secret|token|api[_-]?key|clave|authorization|bearer)\b\s*[:=>]+\s*\S+"),
+    # clave: valor / password = valor / token -> valor.
+    # No dispara si el valor es una lectura de entorno o un hueco por rellenar:
+    # `api_key = os.environ.get("X")` es el patrón correcto, no una fuga.
+    (re.compile(r"(?i)\b(pass(word|wd)?|contrase(ñ|n)a|secret|token|api[_-]?key|clave|authorization|bearer)\b\s*[:=>]+\s*"
+                r"(?!.*(?:os\.environ|process\.env|getenv|ENV\[|vault\.sh|\$\{|<|xxx|\.\.\.))\S+"),
      r"\1: [TACHADO]"),
     # Cadenas de conexión con credenciales dentro
     (re.compile(r"\b([a-z][a-z0-9+.-]*)://[^\s:/@]+:[^\s@]+@"), r"\1://[USUARIO]:[TACHADO]@"),
-    # Application passwords de WordPress: cuatro o más grupos de cuatro
-    (re.compile(r"\b(?:[A-Za-z0-9]{4}\s){3,}[A-Za-z0-9]{4}\b"), "[TACHADO]"),
+    # Application passwords de WordPress: cuatro o más grupos de cuatro.
+    # Se exige al menos un dígito en el conjunto — si no, "para todos los que
+    # leen esto" también es un grupo de cuatro palabras de cuatro letras.
+    (re.compile(r"\b(?=(?:[A-Za-z0-9]{4}\s){3,}[A-Za-z0-9]{4}\b)"
+                r"(?=(?:\S+\s){0,5}\S*\d)(?:[A-Za-z0-9]{4}\s){3,}[A-Za-z0-9]{4}\b"), "[TACHADO]"),
     # Correos: son datos de terceros, no secretos, pero no pintan nada en un panel
     (re.compile(r"\b[\w.+-]+@[\w-]+\.[\w.]{2,}\b"), "[CORREO]"),
     # IPs privadas: revelan la topología de la red de quien usa la skill
     (re.compile(r"\b(?:10|127|192\.168|172\.(?:1[6-9]|2\d|3[01]))\.(?:\d{1,3}\.){1,2}\d{1,3}\b"), "[IP]"),
 ]
 
-# Una línea con mucha entropía y sin espacios suele ser una clave que no encaja
-# en ningún patrón conocido. Se tacha entera.
-_SOSPECHOSA = re.compile(r"\b[A-Za-z0-9+/_=-]{40,}\b")
+# Una cadena larga sin espacios puede ser una clave que no encaja en ningún
+# patrón conocido. Pero también puede ser un SHA de git, un trozo de URL o el
+# slug de un artículo — y un aviso que salta siempre es un aviso que nadie mira.
+_SOSPECHOSA = re.compile(r"(?<![\w/.-])[A-Za-z0-9+/_=-]{40,}(?![\w/.-])")
+_SHA = re.compile(r"^[a-f0-9]+$", re.I)
+
+
+def _es_clave(valor: str) -> bool:
+    """Descarta lo que es largo por otros motivos: hashes, slugs, rutas."""
+    if _SHA.match(valor):          # sha de git, md5, sha256
+        return False
+    if valor.count("-") >= 4 or valor.count("_") >= 4:   # slug de artículo
+        return False
+    tiene_digito = any(c.isdigit() for c in valor)
+    tiene_mayus = any(c.isupper() for c in valor)
+    return tiene_digito and tiene_mayus
 
 
 def ruta_permitida(ruta: Path) -> bool:
@@ -82,7 +101,8 @@ def redactar(texto: str) -> str:
         return ""
     for patron, reemplazo in REGLAS_REDACCION:
         texto = patron.sub(reemplazo, texto)
-    return _SOSPECHOSA.sub("[TACHADO]", texto)
+    return _SOSPECHOSA.sub(
+        lambda m: "[TACHADO]" if _es_clave(m.group(0)) else m.group(0), texto)
 
 
 def tiene_restos(texto: str) -> bool:

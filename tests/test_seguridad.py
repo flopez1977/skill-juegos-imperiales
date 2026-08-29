@@ -77,3 +77,46 @@ class TestAviso:
 
     def test_no_avisa_con_texto_limpio(self):
         assert not sg.tiene_restos("Web en producción, 12 artículos programados.")
+
+
+class TestFalsosPositivos:
+    """Casos reales que hacían saltar el aviso sin haber ningún secreto.
+
+    Salieron de pasar el escáner por un árbol de 149 proyectos: los 11 avisos
+    que dio eran los 11 falsos. Un aviso que siempre miente no lo mira nadie.
+    """
+
+    def test_no_tacha_un_sha_de_git(self):
+        sha = "d541fd0aa1b2c3d4e5f60718293a4b5c6d7e8f90"
+        assert sha in sg.redactar(f"Commit {sha} en main")
+
+    def test_no_tacha_el_slug_largo_de_un_articulo(self):
+        slug = "como-elegir-la-mejor-piscina-de-obra-en-madrid-guia"
+        assert slug in sg.redactar(f"Publicado /blog/{slug}/")
+
+    def test_no_tacha_una_url_larga(self):
+        url = "https://ejemplo.com/wp-content/uploads/2026/08/fotografia-de-portada.jpg"
+        assert "fotografia-de-portada" in sg.redactar(f"Imagen en {url}")
+
+    def test_no_tacha_una_lectura_de_variable_de_entorno(self):
+        linea = 'api_key = os.environ.get("NVIDIA_API_KEY")'
+        assert sg.redactar(linea) == linea
+
+    def test_no_tacha_un_hueco_por_rellenar(self):
+        for linea in ('password: <tu contraseña>', "token: xxxxxxxx",
+                      "api_key: ${API_KEY}", "clave: ..."):
+            assert "[TACHADO]" not in sg.redactar(linea)
+
+    def test_no_tacha_prosa_con_palabras_de_cuatro_letras(self):
+        texto = "Cada vez que sale algo malo hay que ver como esta todo esto"
+        assert sg.redactar(texto) == texto
+
+    def test_no_avisa_al_hablar_de_credenciales_sin_ponerlas(self):
+        assert not sg.tiene_restos(
+            "Token de GitHub expuesto en el remote: incidente resuelto, rotado el 12-07.")
+
+    def test_pero_sigue_tachando_lo_que_si_es_una_clave(self):
+        """El afinado no puede haberse llevado por delante la detección real."""
+        assert sg.tiene_restos("password: Tr0ncoV3rde2026")
+        assert sg.tiene_restos("APP PASS: ab3d EFGH 12x4 wxyz")
+        assert sg.tiene_restos("mysql://fer:miclave@db.local/base")

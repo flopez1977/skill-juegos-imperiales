@@ -1,7 +1,7 @@
 # LOG — skill juegos-imperiales (privada de Imperio)
 
 **Última actualización:** 2026-08-29
-**Estado actual:** v1.0 publicada · 34 tests en verde · CI en marcha
+**Estado actual:** v1.1 · repo privado de Imperio · 42 tests en verde · CI en marcha
 
 ---
 
@@ -71,3 +71,30 @@ datos metidos a mano.
 **Estado al terminar:** 34 tests en verde, generación de punta a punta correcta.
 **Pendiente para próxima sesión:**
 - [ ] Publicar el logro 3/28 en Imperio con el enlace al repo
+
+### [2026-08-29] — Privado, marca de Imperio y afinado del filtro
+**Estado al inicio:** v1.0 en repo público, filtro de secretos sin calibrar.
+**Trabajo realizado:**
+- El repositorio pasa a **privado**: es material interno de Imperio y se entra
+  por invitación. El README explica cómo pedirla.
+- La corona de Imperio va en la cabecera del panel generado, embebida como data
+  URI para que el HTML siga funcionando como fichero suelto.
+- El acento del panel toma el color de la casa (Águila rojo, Grifo oro, Pegaso azul).
+- `<meta charset>` en la plantilla: sin ella los acentos salen rotos al abrir el
+  cuaderno como fichero local, que es como lo abre todo el mundo.
+- Quitadas dos rutas personales que se colaron al extraer la plantilla del panel
+  original, y saneado el diario de datos sobre la máquina de quien lo probó.
+- **Calibrado del filtro de secretos contra un árbol real de 150 proyectos.**
+  Daba 11 avisos y los 11 eran falsos: SHA de git, slugs de artículo, trozos de
+  URL, prosa con palabras de cuatro letras y `os.environ.get(...)`, que es
+  justamente el patrón correcto. Ahora descarta hashes y slugs, exige mayúscula
+  y dígito en las cadenas largas, no dispara con lecturas de entorno ni con
+  huecos por rellenar, y pide un dígito para dar por buena una application
+  password. **Resultado: 11 avisos → 0, sin perder ninguna detección real.**
+  Los ocho casos que lo engañaban están fijados como tests.
+**Estado al terminar:** 42 tests en verde, ruido a cero contra datos reales.
+**Aprendizaje:** un detector que avisa siempre es igual de inútil que uno que no
+avisa nunca — con el agravante de que este parece que funciona. El calibrado
+contra datos reales no era opcional, era parte de construirlo.
+**Pendiente para próxima sesión:**
+- [ ] Invitar al repo a quien lo pida por privado en la comunidad
