@@ -1,0 +1,543 @@
+<title>__TITULO__</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Public+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+
+<style>
+  :root{
+    --bg:#EAEBEF; --panel:#FFFFFF; --panel-2:#F4F5F8; --line:#D5D8E0; --line-soft:#E4E6EC;
+    --text:#181A20; --dim:#5A5F70; --faint:#878DA0;
+    --gold:#9A6E12; --gold-ink:#7C5709; --gold-wash:#F6EDD6; --gold-line:#DCC489;
+    --eagle:#B03A2E; --pegasus:#2C5A9E;
+    --ok:#26694B; --ok-wash:#DFEDE6;
+    --build:#2C5A9E; --build-wash:#DEE7F4;
+    --sale:#8A4A12; --sale-wash:#F6E7D8;
+    --learn:#5B3E8E; --learn-wash:#E9E2F5;
+    --shadow:0 1px 2px rgba(20,22,30,.06), 0 8px 24px -14px rgba(20,22,30,.28);
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#0F1116; --panel:#171A21; --panel-2:#1D212A; --line:#2A2F3B; --line-soft:#232833;
+      --text:#E9EAEE; --dim:#9AA0B2; --faint:#727A8D;
+      --gold:#E4B547; --gold-ink:#F0CB79; --gold-wash:#2A2417; --gold-line:#4A3F22;
+      --eagle:#D96A5C; --pegasus:#6C9BE0;
+      --ok:#5FBE92; --ok-wash:#16281F;
+      --build:#7BA6E8; --build-wash:#151E2C;
+      --sale:#D9975A; --sale-wash:#2A1F14;
+      --learn:#A98FDC; --learn-wash:#211B2E;
+      --shadow:0 1px 2px rgba(0,0,0,.4), 0 10px 28px -16px rgba(0,0,0,.8);
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#0F1116; --panel:#171A21; --panel-2:#1D212A; --line:#2A2F3B; --line-soft:#232833;
+    --text:#E9EAEE; --dim:#9AA0B2; --faint:#727A8D;
+    --gold:#E4B547; --gold-ink:#F0CB79; --gold-wash:#2A2417; --gold-line:#4A3F22;
+    --eagle:#D96A5C; --pegasus:#6C9BE0;
+    --ok:#5FBE92; --ok-wash:#16281F;
+    --build:#7BA6E8; --build-wash:#151E2C;
+    --sale:#D9975A; --sale-wash:#2A1F14;
+    --learn:#A98FDC; --learn-wash:#211B2E;
+    --shadow:0 1px 2px rgba(0,0,0,.4), 0 10px 28px -16px rgba(0,0,0,.8);
+  }
+
+  *{box-sizing:border-box}
+  html,body{overflow-x:hidden; overflow-x:clip}
+  body{
+    margin:0; background:var(--bg); color:var(--text);
+    font-family:"Public Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    font-size:15px; line-height:1.55; -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:1180px; margin:0 auto; padding:0 20px 90px}
+  h1,h2,h3,h4{font-family:"Bricolage Grotesque","Public Sans",sans-serif; text-wrap:balance; margin:0}
+  .mono{font-family:"IBM Plex Mono",ui-monospace,monospace; font-variant-numeric:tabular-nums}
+
+  /* ---------- barra superior ---------- */
+  .topbar{
+    position:sticky; top:0; z-index:40; background:var(--panel);
+    border-bottom:1px solid var(--line);
+  }
+  .topbar-in{max-width:1180px; margin:0 auto; padding:12px 20px; display:flex; align-items:center; gap:16px; flex-wrap:wrap}
+  .crest{width:34px; height:38px; flex:none}
+  .brandtxt{display:flex; flex-direction:column; line-height:1.15}
+  .brandtxt b{font-family:"Bricolage Grotesque",sans-serif; font-size:16px; font-weight:800; letter-spacing:-.01em}
+  .brandtxt span{font-size:11px; color:var(--faint); letter-spacing:.10em; text-transform:uppercase}
+  .topstats{margin-left:auto; display:flex; gap:10px; flex-wrap:wrap}
+  .tstat{
+    background:var(--panel-2); border:1px solid var(--line-soft); border-radius:9px;
+    padding:5px 11px; display:flex; align-items:baseline; gap:7px;
+  }
+  .tstat b{font-family:"IBM Plex Mono",monospace; font-size:17px; font-variant-numeric:tabular-nums; font-weight:600}
+  .tstat span{font-size:10.5px; color:var(--faint); text-transform:uppercase; letter-spacing:.08em}
+
+  /* ---------- cabecera ---------- */
+  header.hero{padding:38px 0 26px; border-bottom:1px solid var(--line); margin-bottom:30px}
+  .eyebrow{font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:var(--gold); font-weight:600; font-family:"IBM Plex Mono",monospace}
+  h1{font-size:clamp(30px,4.4vw,46px); font-weight:800; letter-spacing:-.025em; margin:10px 0 12px; max-width:20ch}
+  .lede{color:var(--dim); max-width:66ch; font-size:16px}
+
+  /* ---------- barra de progreso del mes ---------- */
+  .track{margin-top:26px}
+  .track-labels{display:flex; justify-content:space-between; font-size:11px; color:var(--faint); font-family:"IBM Plex Mono",monospace; margin-bottom:6px}
+  .track-bar{height:9px; border-radius:99px; background:var(--panel-2); border:1px solid var(--line-soft); overflow:hidden; display:flex}
+  .track-done{background:var(--gold); height:100%}
+  .track-today{width:2px; background:var(--text); height:100%; opacity:.55}
+
+  /* ---------- secciones ---------- */
+  section{margin:44px 0 0}
+  .sechead{display:flex; align-items:flex-end; gap:14px; margin-bottom:16px; flex-wrap:wrap}
+  .sechead h2{font-size:21px; font-weight:700; letter-spacing:-.015em}
+  .sechead p{margin:0; color:var(--dim); font-size:13.5px; max-width:60ch}
+  .rule{height:1px; background:var(--line); margin:0 0 18px}
+
+  /* ---------- filtros ---------- */
+  .chips{display:flex; gap:7px; flex-wrap:wrap; margin-bottom:18px}
+  .chip{
+    font:500 12px/1 "Public Sans",sans-serif; padding:7px 12px; border-radius:99px; cursor:pointer;
+    background:var(--panel); border:1px solid var(--line); color:var(--dim);
+  }
+  .chip:hover{border-color:var(--gold-line); color:var(--text)}
+  .chip[aria-pressed="true"]{background:var(--text); color:var(--bg); border-color:var(--text)}
+  .chip:focus-visible{outline:2px solid var(--gold); outline-offset:2px}
+
+  /* ---------- tarjetas de día ---------- */
+  .days{display:grid; grid-template-columns:repeat(auto-fill,minmax(272px,1fr)); gap:12px}
+  .day{
+    background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:14px;
+    display:flex; flex-direction:column; gap:9px; position:relative; box-shadow:var(--shadow);
+  }
+  .day.is-done{background:var(--panel-2); border-color:var(--line-soft)}
+  .day.is-done .day-title{color:var(--dim); text-decoration:line-through; text-decoration-color:var(--gold-line)}
+  .day.is-today{border-color:var(--gold); box-shadow:0 0 0 3px var(--gold-wash), var(--shadow)}
+  .day.locked{opacity:.72}
+  .day-top{display:flex; align-items:center; gap:8px}
+  .daydate{font:600 11px/1 "IBM Plex Mono",monospace; color:var(--faint); letter-spacing:.05em; text-transform:uppercase}
+  .num{
+    margin-left:auto; font:600 11px/1 "IBM Plex Mono",monospace; color:var(--gold-ink);
+    background:var(--gold-wash); border:1px solid var(--gold-line); border-radius:6px; padding:4px 6px;
+  }
+  .day-title{font-family:"Bricolage Grotesque",sans-serif; font-size:15.5px; font-weight:700; line-height:1.28; letter-spacing:-.01em}
+  .day-src{font-size:12px; color:var(--faint); font-family:"IBM Plex Mono",monospace}
+  .tag{display:inline-flex; align-items:center; gap:5px; font:600 10px/1 "IBM Plex Mono",monospace; letter-spacing:.07em; text-transform:uppercase; padding:4px 7px; border-radius:5px}
+  .t-done{background:var(--ok-wash); color:var(--ok)}
+  .t-build{background:var(--build-wash); color:var(--build)}
+  .t-sale{background:var(--sale-wash); color:var(--sale)}
+  .t-learn{background:var(--learn-wash); color:var(--learn)}
+  .t-remate{background:var(--gold-wash); color:var(--gold-ink)}
+  .t-buffer{background:var(--panel-2); color:var(--faint)}
+  .day-actions{margin-top:auto; display:flex; align-items:center; gap:8px; padding-top:4px}
+  .btn{
+    font:600 12px/1 "Public Sans",sans-serif; padding:8px 11px; border-radius:8px; cursor:pointer;
+    border:1px solid var(--line); background:var(--panel-2); color:var(--text);
+  }
+  .btn:hover{border-color:var(--gold-line)}
+  .btn:focus-visible{outline:2px solid var(--gold); outline-offset:2px}
+  .btn-main{background:var(--text); color:var(--bg); border-color:var(--text)}
+  .btn-main:hover{opacity:.88}
+  .mark{display:flex; align-items:center; gap:7px; font-size:12px; color:var(--dim); cursor:pointer; user-select:none; margin-left:auto}
+  .mark input{accent-color:var(--gold); width:16px; height:16px; cursor:pointer}
+
+  /* ---------- panel de post ---------- */
+  .sheet{
+    position:fixed; inset:0; z-index:60; background:rgba(12,14,18,.55);
+    display:flex; justify-content:flex-end; backdrop-filter:blur(3px);
+  }
+  .sheet[hidden]{display:none}
+  .sheet-in{
+    background:var(--panel); width:min(620px,100%); height:100%; overflow-y:auto;
+    border-left:1px solid var(--line); padding:22px 24px 40px; display:flex; flex-direction:column; gap:14px;
+  }
+  .sheet-head{display:flex; align-items:flex-start; gap:12px}
+  .sheet-head h3{font-size:19px; font-weight:700; letter-spacing:-.015em; flex:1}
+  .close{background:none; border:none; font-size:24px; line-height:1; color:var(--faint); cursor:pointer; padding:0 4px}
+  .close:hover{color:var(--text)}
+  .hint{font-size:12.5px; color:var(--dim); background:var(--gold-wash); border:1px solid var(--gold-line); border-radius:8px; padding:9px 11px}
+  textarea{
+    width:100%; min-height:440px; resize:vertical; background:var(--panel-2); color:var(--text);
+    border:1px solid var(--line); border-radius:10px; padding:14px;
+    font-family:"IBM Plex Mono",monospace; font-size:12.5px; line-height:1.62;
+  }
+  textarea:focus{outline:2px solid var(--gold); outline-offset:1px}
+  .sheet-actions{display:flex; gap:9px; align-items:center; flex-wrap:wrap}
+  .copied{font-size:12px; color:var(--ok); font-weight:600; opacity:0; transition:opacity .2s}
+  .copied.on{opacity:1}
+
+  /* ---------- fueguito ---------- */
+  .fuego{background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:18px 20px; box-shadow:var(--shadow)}
+  .fuego-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(215px,1fr)); gap:10px; margin-top:14px}
+  .facto{display:flex; gap:10px; align-items:flex-start; padding:10px 12px; background:var(--panel-2); border:1px solid var(--line-soft); border-radius:9px; cursor:pointer}
+  .facto input{accent-color:var(--gold); margin-top:2px; width:15px; height:15px; flex:none}
+  .facto span{font-size:13px; line-height:1.4}
+  .facto b{display:block; font-size:10px; color:var(--faint); font-family:"IBM Plex Mono",monospace; letter-spacing:.06em; text-transform:uppercase; margin-top:3px}
+  .fuego-count{font-family:"IBM Plex Mono",monospace; font-size:13px; color:var(--dim)}
+  .fuego-count b{color:var(--gold); font-size:20px}
+
+  /* ---------- listas simples ---------- */
+  .cards{display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:12px}
+  .card{background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:15px 16px; box-shadow:var(--shadow)}
+  .card h4{font-size:15px; font-weight:700; margin-bottom:6px; letter-spacing:-.01em}
+  .card p{margin:0; font-size:13.5px; color:var(--dim)}
+  .card .meta{margin-top:10px; display:flex; gap:7px; flex-wrap:wrap; align-items:center}
+  .cost{font:600 10px/1 "IBM Plex Mono",monospace; color:var(--faint); letter-spacing:.06em; text-transform:uppercase; border:1px solid var(--line); border-radius:5px; padding:4px 6px}
+
+  /* ---------- tabla de puntos ---------- */
+  .scroll{overflow-x:auto; border:1px solid var(--line); border-radius:12px; background:var(--panel)}
+  table{border-collapse:collapse; width:100%; min-width:520px; font-size:13.5px}
+  th,td{text-align:left; padding:11px 15px; border-bottom:1px solid var(--line-soft)}
+  th{font:600 10.5px/1 "IBM Plex Mono",monospace; letter-spacing:.09em; text-transform:uppercase; color:var(--faint); background:var(--panel-2)}
+  tr:last-child td{border-bottom:none}
+  td.n{font-family:"IBM Plex Mono",monospace; font-variant-numeric:tabular-nums; text-align:right; font-weight:600}
+  tfoot td{background:var(--panel-2); font-weight:700; border-top:1px solid var(--line)}
+
+  footer{margin-top:52px; padding-top:20px; border-top:1px solid var(--line); color:var(--faint); font-size:12.5px}
+
+  @media (prefers-reduced-motion:reduce){*{transition:none!important; animation:none!important}}
+</style>
+
+<div class="topbar">
+  <div class="topbar-in">
+    <svg class="crest" viewBox="0 0 40 40" aria-hidden="true">
+      <circle cx="20" cy="20" r="18" fill="none" stroke="var(--gold)" stroke-width="3.2"/>
+      <circle cx="20" cy="20" r="13" fill="var(--gold-wash)" stroke="var(--gold-line)" stroke-width="1"/>
+      <path d="M20 11c2.4 0 3.6 1.6 3.4 3.2 1.8.3 3.1 1.7 3.1 3.6 0 2.3-1.6 3.4-3.3 3.6l2.6 4.2h-2.6l-2-3.4-1.6 3.4h-2.4l1.9-4c-2-.5-3.3-1.9-3.3-3.9 0-1.8 1.2-3.2 3-3.5-.2-1.7 1-3.2 3.2-3.2z" fill="var(--gold)"/>
+      <path d="M6 18h3v4H6zM31 18h3v4h-3z" fill="var(--gold)"/>
+    </svg>
+    <div class="brandtxt"><b>__CASA__</b><span>__APELLIDO__</span></div>
+    <div class="topstats">
+      <div class="tstat"><b id="s-dias">—</b><span>días para la final</span></div>
+      <div class="tstat"><b id="s-logros">—</b><span>logros / __META__</span></div>
+      <div class="tstat"><b id="s-puntos">—</b><span>puntos casa</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+
+<header class="hero">
+  <div class="eyebrow">__PERIODO__</div>
+  <h1>Un logro al día, y que cada uno sirva para trabajar mejor</h1>
+  <p class="lede">Cuaderno de campaña de la agencia: qué se publica cada día, de qué proyecto sale
+  y qué hay que construir antes. No hay logro inventado — todo lo de aquí es trabajo que ya
+  existe en tus carpetas de proyecto o que estaba en cola para hacerse igualmente.</p>
+
+  <div class="track">
+    <div class="track-labels"><span>__INI_CORTO__</span><span id="track-hoy">HOY</span><span>__FIN_CORTO__</span></div>
+    <div class="track-bar"><div class="track-done" id="track-done" style="width:0"></div><div class="track-today"></div></div>
+  </div>
+</header>
+
+<section id="calendario">
+  <div class="sechead">
+    <h2>Calendario de publicación</h2>
+    <p>El número de logro se recalcula solo según lo que marques: si un día se cae, no se rompe la cuenta.</p>
+  </div>
+  <div class="chips" id="filtros">
+    <button class="chip" data-f="all" aria-pressed="true">Todos</button>
+    <button class="chip" data-f="done" aria-pressed="false">Ya hecho · solo redactar</button>
+    <button class="chip" data-f="build" aria-pressed="false">Hay que construirlo</button>
+    <button class="chip" data-f="sale" aria-pressed="false">Venta · +5</button>
+    <button class="chip" data-f="remate" aria-pressed="false">Remate de post abierto</button>
+    <button class="chip" data-f="learn" aria-pressed="false">Aprendizaje</button>
+    <button class="chip" data-f="pend" aria-pressed="false">Sin publicar</button>
+  </div>
+  <div class="days" id="days"></div>
+</section>
+
+<section id="fueguito">
+  <div class="sechead">
+    <h2>Fueguito del día</h2>
+    <p>Mínimo 10 interacciones diarias. Semana completa = +5 para el Grifo. <b>Ojo: la lista de abajo es una rutina propuesta por mí, no las reglas de Skool</b> — hay que confirmar qué cuenta como interacción antes de fiarse de ella.</p>
+  </div>
+  <div class="fuego">
+    <div class="hint" style="margin-bottom:14px">Rutina propuesta, sin confirmar. No sé si en el fueguito cuentan los likes, solo los comentarios o cualquier acción. Ayer marcaste 22 actividades, así que el listón de 10 lo pasas de sobra — esto es para no depender de acordarte.</div>
+    <div class="fuego-count"><b id="fuego-n">0</b> / 10 hoy · <span id="fuego-msg">te faltan 10</span></div>
+    <div class="fuego-grid" id="fuego-grid"></div>
+  </div>
+</section>
+
+<section id="puntos">
+  <div class="sechead">
+    <h2>Cuenta de puntos</h2>
+    <p>Proyección hasta el 28 de septiembre si se cumple el calendario.</p>
+  </div>
+  <div class="scroll">
+    <table>
+      <thead><tr><th>Concepto</th><th>Regla</th><th style="text-align:right">Hecho</th><th style="text-align:right">Techo</th></tr></thead>
+      <tbody id="tbody-puntos"></tbody>
+      <tfoot><tr><td colspan="2">Total para la Casa Grifo</td><td class="n" id="pt-hecho">0</td><td class="n" id="pt-techo">0</td></tr></tfoot>
+    </table>
+  </div>
+</section>
+
+<section id="ya">
+  <div class="sechead">
+    <h2>Ya publicado · no repetir</h2>
+    <p>Tus contribuciones anteriores. El calendario de arriba está filtrado contra esta lista: nada de lo planificado repite ninguna de estas.</p>
+  </div>
+  <div class="scroll">
+    <table>
+      <thead><tr><th style="width:70px">Cuándo</th><th style="width:110px">Categoría</th><th>Post</th><th style="width:70px;text-align:right">Nº</th></tr></thead>
+      <tbody id="tbody-ya"></tbody>
+    </table>
+  </div>
+</section>
+
+<section id="reserva">
+  <div class="sechead">
+    <h2>Banco de reserva</h2>
+    <p>Si un día se tuerce, se tira de aquí sin pensar. Todos son proyectos reales ya cerrados o en producción.</p>
+  </div>
+  <div class="cards" id="reserva-cards"></div>
+</section>
+
+<section id="accionables">
+  <div class="sechead">
+    <h2>Seis cosas que conviene construir igualmente</h2>
+    <p>Propuesta propia: pequeñas, se hacen en una sesión y se quedan trabajando después del 28 de septiembre. Cada una es además un logro publicable.</p>
+  </div>
+  <div class="cards" id="acc-cards"></div>
+</section>
+
+<section id="marco">
+  <div class="sechead">
+    <h2>El marco del post</h2>
+    <p>Skool no admite markdown: ni asteriscos, ni almohadillas, ni tablas. Solo texto plano, emojis y guiones. Los borradores ya salen así.</p>
+  </div>
+  <div class="rule"></div>
+  <div class="cards">
+    <div class="card">
+      <h4>Cabecera fija</h4>
+      <p><span class="mono">⚔️🟡 LOGRO IMPERIAL n/28 - CASA GRIFO</span><br>Siempre igual, para que se te reconozca al scrollear. Categoría del post: <b>Logros</b>.</p>
+    </div>
+    <div class="card">
+      <h4>Cinco bloques numerados</h4>
+      <p>1️⃣ Sistema · 2️⃣ Qué problema resuelve · 3️⃣ Stack · 4️⃣ Antes → Después · 5️⃣ Prueba. El quinto es siempre capturas, nunca texto.</p>
+    </div>
+    <div class="card">
+      <h4>Titular sin jerga</h4>
+      <p>«Sustituto de TLDV que transcribe en local» funciona. «Pipeline de transcripción con Whisper» no. El nombre técnico va en el bloque 3.</p>
+    </div>
+    <div class="card">
+      <h4>Prueba obligatoria</h4>
+      <p>Captura de terminal, del panel o del resultado. Las capturas van en <span class="mono">Imperio-agentico/capturas/</span> con el número del logro delante.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  Cuaderno privado de campaña · Casa Grifo · datos de proyecto leídos de ~/Claude · el estado de publicación se guarda solo en este navegador.
+</footer>
+</div>
+
+<div class="sheet" id="sheet" hidden>
+  <div class="sheet-in">
+    <div class="sheet-head">
+      <h3 id="sheet-title">Borrador</h3>
+      <button class="close" id="sheet-close" aria-label="Cerrar">×</button>
+    </div>
+    <div class="hint">Texto plano listo para pegar en Skool. Revísalo, cámbialo a tu voz y sube las capturas al final — el bloque 5 no se rellena solo.</div>
+    <textarea id="sheet-text" spellcheck="false"></textarea>
+    <div class="sheet-actions">
+      <button class="btn btn-main" id="btn-copy">Copiar para Skool</button>
+      <button class="btn" id="btn-done">Marcar como publicado</button>
+      <span class="copied" id="copied">Copiado</span>
+    </div>
+  </div>
+</div>
+
+<script>
+const CFG = __CONFIG__;
+const YA = CFG.ya, D = CFG.dias, RESERVA = CFG.reserva, ACC = CFG.acc;
+const HOY = new Date(CFG.hoy[0], CFG.hoy[1]-1, CFG.hoy[2]);
+const INICIO = new Date(CFG.inicio[0], CFG.inicio[1]-1, CFG.inicio[2]);
+const FIN = new Date(CFG.fin[0], CFG.fin[1]-1, CFG.fin[2]);
+const PUBLICADOS = CFG.publicados;
+const META = CFG.meta;
+
+// ---------- estado ----------
+const KEY="grifo-v3";
+let S = {done:{}, fuego:{}};
+try{ const raw=localStorage.getItem(KEY); if(raw) S=Object.assign(S,JSON.parse(raw)); }catch(e){}
+function save(){ try{ localStorage.setItem(KEY,JSON.stringify(S)); }catch(e){} }
+
+const TAGS={done:["t-done","Ya hecho"],build:["t-build","Construir"],sale:["t-sale","Venta +5"],learn:["t-learn","Aprendizaje"],remate:["t-remate","Remate"],buffer:["t-buffer","Colchón"]};
+const MESES=["ene","feb","mar","abr","may","jun","jul","ago","sep","oct","nov","dic"];
+const DIAS=["dom","lun","mar","mié","jue","vie","sáb"];
+function fecha(iso){ const p=iso.split("-").map(Number); const dt=new Date(p[0],p[1]-1,p[2]); return DIAS[dt.getDay()]+" "+p[2]+" "+MESES[p[1]-1]; }
+function esHoy(iso){ const p=iso.split("-").map(Number); return p[0]===HOY.getFullYear()&&p[1]-1===HOY.getMonth()&&p[2]===HOY.getDate(); }
+
+// ---------- borrador de post ----------
+function borrador(x,n){
+  const L=[];
+  L.push("⚔️🟡 LOGRO IMPERIAL "+n+"/28 - CASA GRIFO");
+  L.push("");
+  L.push("1️⃣ Sistema / logro: "+x.tit);
+  if(x.sis) L.push(x.sis);
+  L.push("");
+  L.push("2️⃣ Qué problema resuelve:");
+  L.push(x.pro||"[por escribir]");
+  L.push("");
+  L.push("3️⃣ Stack:");
+  (x.stk&&x.stk.length?x.stk:["[por escribir]"]).forEach(s=>L.push("- "+s));
+  L.push("");
+  L.push("4️⃣ Antes → Después:");
+  L.push("Antes: "+(x.ant||"[por escribir]"));
+  L.push("Ahora: "+(x.aho||"[por escribir]"));
+  L.push("");
+  L.push("5️⃣ Prueba:");
+  L.push("[subir captura — sin captura el logro no cuenta]");
+  return L.join("\n");
+}
+
+// ---------- render ----------
+const cont=document.getElementById("days");
+let filtro="all";
+
+function numeroDe(i){
+  let n=PUBLICADOS;
+  for(let k=0;k<=i;k++) if(D[k].t!=="buffer") n++;
+  return n;
+}
+
+function render(){
+  cont.innerHTML="";
+  D.forEach((x,i)=>{
+    const hecho=!!S.done[x.d];
+    if(filtro!=="all"){
+      if(filtro==="pend"&&hecho) return;
+      if(filtro!=="pend"&&x.t!==filtro) return;
+    }
+    const el=document.createElement("article");
+    el.className="day"+(hecho?" is-done":"")+(esHoy(x.d)?" is-today":"");
+    const tg=TAGS[x.t];
+    el.innerHTML=
+      '<div class="day-top"><span class="daydate">'+fecha(x.d)+'</span>'+
+      '<span class="tag '+tg[0]+'">'+tg[1]+'</span>'+
+      (x.t==="buffer"?'<span class="num" style="background:var(--panel-2);border-color:var(--line);color:var(--faint)">libre</span>':'<span class="num">'+numeroDe(i)+'/'+META+'</span>')+'</div>'+
+      '<h3 class="day-title">'+x.tit+'</h3>'+
+      '<div class="day-src">'+x.src+'</div>'+
+      (x.nota?'<p style="margin:0;font-size:12.5px;color:var(--dim)">'+x.nota+'</p>':'')+
+      '<div class="day-actions">'+
+        '<button class="btn btn-main" data-open="'+i+'">Ver borrador</button>'+
+        '<label class="mark"><input type="checkbox" data-chk="'+x.d+'"'+(hecho?" checked":"")+'> publicado</label>'+
+      '</div>';
+    cont.appendChild(el);
+  });
+  stats();
+}
+
+function stats(){
+  const hechos=Object.values(S.done).filter(Boolean).length;
+  const total=PUBLICADOS+hechos;
+  document.getElementById("s-logros").textContent=total;
+  const fin=FIN;
+  const dias=Math.max(0,Math.round((fin-HOY)/86400000));
+  document.getElementById("s-dias").textContent=dias;
+
+  const ini=INICIO;
+  const pct=Math.min(100,Math.max(0,(HOY-ini)/(fin-ini)*100));
+  document.getElementById("track-done").style.width=pct+"%";
+  document.getElementById("track-hoy").textContent="HOY · "+fecha(hoyKey).toUpperCase();
+
+  // puntos
+  const ventasHechas=D.filter((x,i)=>x.t==="sale"&&S.done[x.d]).length;
+  const ventasTecho=D.filter(x=>x.t==="sale").length;
+  const semanas=Math.floor(total/7);
+  const filas=[
+    ["Logros publicados","+1 por día, máximo 1",total,META],
+    ["Ventas de automatización","+5 cada una, con prueba",ventasHechas*5,ventasTecho*5],
+    ["Semanas de fueguito","+5 por semana completa",semanas*5,20],
+    ["Referidos","+10 por cada uno con tu link",0,30],
+    ["Concursos","participar suma · podio +30/+20/+10",0,30]
+  ];
+  const tb=document.getElementById("tbody-puntos");
+  tb.innerHTML=filas.map(f=>'<tr><td>'+f[0]+'</td><td style="color:var(--dim)">'+f[1]+'</td><td class="n">'+f[2]+'</td><td class="n" style="color:var(--faint)">'+f[3]+'</td></tr>').join("");
+  const sh=filas.reduce((a,f)=>a+f[2],0), st=filas.reduce((a,f)=>a+f[3],0);
+  document.getElementById("pt-hecho").textContent=sh;
+  document.getElementById("pt-techo").textContent=st;
+  document.getElementById("s-puntos").textContent=sh;
+}
+
+cont.addEventListener("click",e=>{
+  const b=e.target.closest("[data-open]");
+  if(b) abrir(+b.dataset.open);
+});
+cont.addEventListener("change",e=>{
+  const c=e.target.closest("[data-chk]");
+  if(c){ S.done[c.dataset.chk]=c.checked; save(); render(); }
+});
+
+document.getElementById("filtros").addEventListener("click",e=>{
+  const b=e.target.closest(".chip"); if(!b) return;
+  filtro=b.dataset.f;
+  [...document.querySelectorAll("#filtros .chip")].forEach(c=>c.setAttribute("aria-pressed",c===b));
+  render();
+});
+
+// ---------- panel ----------
+const sheet=document.getElementById("sheet");
+let abierto=null;
+function abrir(i){
+  abierto=i; const x=D[i];
+  document.getElementById("sheet-title").textContent=x.tit;
+  document.getElementById("sheet-text").value=borrador(x,numeroDe(i));
+  sheet.hidden=false;
+  document.getElementById("sheet-text").focus();
+}
+function cerrar(){ sheet.hidden=true; abierto=null; document.getElementById("copied").classList.remove("on"); }
+document.getElementById("sheet-close").addEventListener("click",cerrar);
+sheet.addEventListener("click",e=>{ if(e.target===sheet) cerrar(); });
+document.addEventListener("keydown",e=>{ if(e.key==="Escape"&&!sheet.hidden) cerrar(); });
+document.getElementById("btn-copy").addEventListener("click",async()=>{
+  const t=document.getElementById("sheet-text");
+  try{ await navigator.clipboard.writeText(t.value); }catch(e){ t.select(); document.execCommand("copy"); }
+  const c=document.getElementById("copied"); c.classList.add("on"); setTimeout(()=>c.classList.remove("on"),1800);
+});
+document.getElementById("btn-done").addEventListener("click",()=>{
+  if(abierto===null) return;
+  S.done[D[abierto].d]=true; save(); render(); cerrar();
+});
+
+// ---------- fueguito ----------
+const FUEGO=[
+ ["Publicar tu logro del día","el que toca en el calendario"],
+ ["Comentar 3 logros de otros","uno por casa, si puedes"],
+ ["Responder los comentarios de tu post","siempre, es lo que más engancha"],
+ ["Dar 3 likes con criterio","a lo que de verdad te aporte"],
+ ["Contestar una duda en General","donde sepas de verdad"],
+ ["Preguntar algo tú","una duda real, no de compromiso"],
+ ["Saludar a alguien que entra nuevo","cuesta 10 segundos"],
+ ["Guardar una idea que veas","al banco de reserva"],
+ ["Revisar si hay concurso abierto","participar ya suma"],
+ ["Compartir un dato concreto","un número tuyo, no una opinión"]
+];
+const fg=document.getElementById("fuego-grid");
+const hoyKey=CFG.hoy.map((n,i)=>i?String(n).padStart(2,"0"):n).join("-");
+S.fuego[hoyKey]=S.fuego[hoyKey]||{};
+fg.innerHTML=FUEGO.map((f,i)=>
+ '<label class="facto"><input type="checkbox" data-fu="'+i+'"'+(S.fuego[hoyKey][i]?" checked":"")+'>'+
+ '<span>'+f[0]+'<b>'+f[1]+'</b></span></label>').join("");
+function fuegoStats(){
+  const n=Object.values(S.fuego[hoyKey]).filter(Boolean).length;
+  document.getElementById("fuego-n").textContent=n;
+  document.getElementById("fuego-msg").textContent = n>=10 ? "racha salvada por hoy" : "te faltan "+(10-n);
+}
+fg.addEventListener("change",e=>{
+  const c=e.target.closest("[data-fu]"); if(!c) return;
+  S.fuego[hoyKey][c.dataset.fu]=c.checked; save(); fuegoStats();
+});
+fuegoStats();
+
+// ---------- listas ----------
+document.getElementById("tbody-ya").innerHTML=YA.map(y=>
+ '<tr><td class="mono" style="color:var(--faint);font-size:12px">'+y[0]+'</td>'+
+ '<td><span class="tag '+(y[1]==="Logros"?"t-done":"t-buffer")+'">'+y[1]+'</span></td>'+
+ '<td>'+y[2]+'</td>'+
+ '<td class="n" style="color:var(--gold-ink)">'+(y[3]||"—")+'</td></tr>').join("");
+
+document.getElementById("reserva-cards").innerHTML=RESERVA.map(r=>
+ '<div class="card"><h4>'+r.t+'</h4><p>'+r.d+'</p></div>').join("");
+document.getElementById("acc-cards").innerHTML=ACC.map(a=>
+ '<div class="card"><h4>'+a.t+'</h4><p>'+a.d+'</p><div class="meta"><span class="cost">'+a.c+'</span></div></div>').join("");
+
+render();
+</script>

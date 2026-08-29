@@ -1,0 +1,44 @@
+{
+  "id": "v3",
+  "nombre": "Juegos Imperiales V3",
+  "inicio": "2026-08-28",
+  "fin": "2026-09-28",
+  "meta_logros": 28,
+  "casas": [
+    {"nombre": "Águila", "emoji": "🔴", "desde": "A", "hasta": "F", "lema": "el estandarte de las legiones"},
+    {"nombre": "Grifo",  "emoji": "🟡", "desde": "G", "hasta": "O", "lema": "el guardián de los tesoros"},
+    {"nombre": "Pegaso", "emoji": "🔵", "desde": "P", "hasta": "Z", "lema": "el que sube al Olimpo"}
+  ],
+  "reglas_casa": [
+    "Vale el apellido, no el nombre",
+    "Con dos apellidos manda el primero",
+    "Los acentos no mueven a nadie: Ángel va a la A",
+    "La Ñ va con la N",
+    "El padrón está congelado: editar el perfil no te cambia de casa"
+  ],
+  "puntos": [
+    {"concepto": "Logro válido", "valor": 1, "tope": "1 por día", "regla": "+1 por día, máximo 1"},
+    {"concepto": "Referido con tu link", "valor": 10, "tope": "", "regla": "+10 por cada uno"},
+    {"concepto": "Semana completa de fueguito", "valor": 5, "tope": "", "regla": "+5 por semana completa"},
+    {"concepto": "Venta de automatización o sistema IA", "valor": 5, "tope": "", "regla": "+5, con prueba"},
+    {"concepto": "Concursos", "valor": 0, "tope": "", "regla": "participar suma · podio +30/+20/+10"}
+  ],
+  "fueguito": {
+    "minimo_diario": 10,
+    "descripcion": "Mínimo 10 interacciones diarias en la comunidad. Semana completa: +5.",
+    "aviso": "Qué cuenta exactamente como interacción no está publicado en las reglas. Confírmalo antes de fiarte de una rutina concreta."
+  },
+  "marcador": "Se actualiza todos los lunes",
+  "formato_post": {
+    "cabecera": "⚔️{emoji} LOGRO IMPERIAL {n}/{meta} - CASA {CASA}",
+    "categoria": "Logros",
+    "bloques": [
+      "1️⃣ Sistema / logro:",
+      "2️⃣ Qué problema resuelve:",
+      "3️⃣ Stack:",
+      "4️⃣ Antes → Después:",
+      "5️⃣ Prueba:"
+    ],
+    "restriccion": "Skool no admite markdown. Texto plano, emojis y guiones. Nada de asteriscos, almohadillas ni tablas."
+  }
+}

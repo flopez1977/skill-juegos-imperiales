@@ -1,0 +1,7 @@
+__pycache__/
+*.pyc
+.pytest_cache/
+perfil.json
+inventario.json
+cuaderno.html
+*.local.*
