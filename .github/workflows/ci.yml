@@ -17,7 +17,7 @@ jobs:
       matrix:
         python: ["3.10", "3.13"]
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python }}
@@ -28,7 +28,7 @@ jobs:
     name: Sin llamadas de red
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - name: La promesa del README se comprueba, no se firma
         run: |
           if grep -rnE '\b(requests|urllib|httpx|socket|aiohttp)\b' scripts/; then
@@ -43,5 +43,5 @@ jobs:
     container:
       image: semgrep/semgrep
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - run: semgrep --config=p/python --config=p/secrets --error --skip-unknown-extensions .
