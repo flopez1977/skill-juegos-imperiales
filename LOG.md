@@ -1,7 +1,7 @@
 # LOG — skill juegos-imperiales
 
 **Última actualización:** 2026-08-29
-**Estado actual:** v1.0 terminada, 34 tests en verde, pendiente de publicar en GitHub
+**Estado actual:** v1.0 publicada · 34 tests en verde · CI en marcha
 
 ---
 
@@ -12,8 +12,8 @@ miembro de la comunidad Imperio Agéntico para cualquier temporada de los Juegos
 Imperiales: casa por apellido, escaneo de sus propios proyectos, calendario de
 logros repartido y borrador de cada post en texto plano de Skool.
 
-Nace del panel privado de Fernando (`../panel-juegos-imperiales.html`), que se
-generaliza para que cada uno tenga el suyo con sus cosas.
+Nace de un panel privado hecho a mano para una sola persona, que se generaliza
+para que cada uno tenga el suyo con sus propios proyectos dentro.
 
 ## Stack técnico
 
@@ -53,7 +53,7 @@ clientes del usuario y se avisa por escrito al generarlo y en el README.
 ## Historial de sesiones
 
 ### [2026-08-29] — Construcción completa de la v1.0
-**Estado al inicio:** no existía. Solo el panel privado de Fernando, con los
+**Estado al inicio:** no existía. Solo un panel privado hecho a mano, con los
 datos metidos a mano.
 **Trabajo realizado:**
 - Threat model exprés con la skill `dev-security` antes de escribir código.
@@ -65,11 +65,9 @@ datos metidos a mano.
   borradores desde inventario, escapado recursivo. 19 tests.
 - `plantillas/panel.html`: el panel privado parametrizado con marcadores.
 - `temporadas/v3.json`: reglas de la temporada 3 completas.
-- Probado contra las carpetas reales: 149 proyectos detectados, 52 terminados,
-  11 con credenciales en claro tachadas por el filtro.
+- Probado contra un árbol de proyectos real de gran tamaño: detecta y clasifica
+  correctamente, y el filtro de secretos saltó en varios proyectos (el aviso por
+  proyecto funciona).
 **Estado al terminar:** 34 tests en verde, generación de punta a punta correcta.
 **Pendiente para próxima sesión:**
-- [ ] Captura para `docs/panel.png` (la usa el README)
-- [ ] Crear el repo público `flopez1977/skill-juegos-imperiales` y subir
-- [ ] Montar CI con la skill `seguridad-repo`
 - [ ] Publicar el logro 3/28 en Imperio con el enlace al repo
