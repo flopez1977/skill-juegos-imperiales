@@ -138,6 +138,12 @@ autor.
 - `gh repo edit --visibility public`.
 **Estado al terminar:** repo público en
 https://github.com/flopez1977/skill-juegos-imperiales
+- **Regla de protección en `main`** (gratis desde que el repo es público):
+  push directo bloqueado, se entra por PR (0 aprobaciones — repo de un solo
+  autor), los cuatro checks del CI en verde y la rama al día con `main`,
+  historia lineal, sin `force push` ni borrado de rama, conversaciones
+  resueltas. `enforce_admins` queda desactivado a propósito: deja una salida
+  de emergencia al dueño sin tener que desmontar la regla.
+**Estado al terminar:** repo público con `main` protegida.
 **Pendiente para próxima sesión:**
-- [ ] Proteger `main`: ya es gratis al ser público (antes pedía GitHub Pro).
-      Decidir regla (PR obligatorio / CI en verde) y aplicarla.
+- [ ] Nada abierto.
