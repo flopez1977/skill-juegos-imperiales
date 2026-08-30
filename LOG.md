@@ -1,7 +1,7 @@
 # LOG — skill juegos-imperiales (privada de Imperio)
 
-**Última actualización:** 2026-08-29
-**Estado actual:** v1.2 · repo privado de Imperio · 45 tests en verde · CI en verde
+**Última actualización:** 2026-08-30
+**Estado actual:** v1.2 · repo **público** · 45 tests en verde · CI en verde
 
 ---
 
@@ -121,3 +121,23 @@ autor.
 **Pendiente para próxima sesión:**
 - [ ] Proteger `main` requiere GitHub Pro en repos privados: decidir si compensa
       o si basta con un hook local
+
+---
+
+### [2026-08-30] — El repositorio pasa a público
+**Estado al inicio:** repo privado en `flopez1977/skill-juegos-imperiales`.
+**Trabajo realizado:**
+- Revisión previa al cambio de visibilidad: la historia completa (`git rev-list
+  --all`) no contiene credenciales, rutas `/Users/`, dominios ni nombres de
+  clientes. Las únicas coincidencias del grep de secretos son el propio código
+  del filtro y sus fixtures de test (claves falsas).
+- `docs/panel.png` es un perfil inventado (Casa Pegaso, rutas de ejemplo).
+- El commit `6f25e5d` ya había sacado del diario los datos personales de quien
+  lo probó; el texto anterior sigue en la historia, pero solo dice cuántos
+  proyectos tenía el árbol de pruebas: se acepta.
+- `gh repo edit --visibility public`.
+**Estado al terminar:** repo público en
+https://github.com/flopez1977/skill-juegos-imperiales
+**Pendiente para próxima sesión:**
+- [ ] Proteger `main`: ya es gratis al ser público (antes pedía GitHub Pro).
+      Decidir regla (PR obligatorio / CI en verde) y aplicarla.
